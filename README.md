@@ -1,32 +1,16 @@
-# User login module
+# Crypto platform
 
-Ejercicio para trabajar dobles de test
+Ejercicio para trabajar dobles de test, test unitarios y tests de integración
 
 # Descripción
 
-User login módulo es una plataforma que se encarga de iniciar la sesión de nuestros usuarios
-usando diferentes proveedores.
+Crypto platform es una API que nos va a permitir estás al día en el mercado del estado de las criptomonedas.
 
-Este módulo fue subcontratado a una empresa externa con la que por varios desacuerdos no ha llegado a finalizar
-el desarrollo dejándonos esta implementación parcial. Nuestro trabajo, acabarlo.
+Para eso, hace uso de una API externa cuya documentación se encuentra [aquí](https://www.coinlore.com/cryptocurrency-data-api)
 
-El código está separado de la siguiente manera:
-Domain:
-- User: Es la clase que vamos a utilizar para modelas la información de nuestros usuarios
-
-Application:
-- UserLoginService: Es un servicio que se va a encargar de loggear a los usuarios
-- SessionManager: Es una interfaz que define el contrato que habrá que cumplir para añadir un nuevo proveedor de sesión
-
-Infraestructura:
-- FacebookSessionManager: Esto parece ser la implementación de Facebook como proveedor de sesión de usuarios. La 
-empresa externa nos dijo que esta parte estaba implementada, era funcional y cumplía con las reglas de negocio...
-
-Este módulo es una parte clave de nuestro negocio (entonces, ¿por qué se externalizó? no lo sabemos). Es un sistema
-que vamos a necesitar que escale con fácilmente con nuevas funcionalidades e implementaciones de diferentes gestores
-de sesión (Google, Facebook, Github, ...) para que el negocio pueda seguir incorporando nuevos usuario.
-
-¿Vamos a por ello?
+Nuestra idea es ir añadiendo funcionalidades poco a poco en medida que las vayamos necesitando, pero el proyecto es
+ambicioso y va a tener clave para la organización dado que nos va a permitir tomar mejores decisiones gracias 
+a la información procesada y organizada en esta plataforma.
 
 
 ## Properties
@@ -35,10 +19,15 @@ Java version: 18
 
 Gradle version: 7.5
 
+Uses Spring boot as base framework and GSON for object serialization. 
+
 Build project:
 - ./gradlew build
 
   :warning: :warning: **Build will fail because of tests, this is done in purpose, have a look at them!**  
+
+Run project:
+- ./gradlew bootRun
 
 ---
 
