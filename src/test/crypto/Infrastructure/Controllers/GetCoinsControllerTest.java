@@ -30,19 +30,6 @@ public class GetCoinsControllerTest {
     private Client client;
 
     @Test
-    public void getsEmptyCoinsList() throws Exception {
-        String jsonString = "{data: []}";
-        JsonObject jsonResponse = (JsonObject) JsonParser.parseString(jsonString);
-
-        when(client.send(any(HttpRequest.class))).thenReturn(jsonResponse);
-
-        mvc.perform(MockMvcRequestBuilders.get("/coins").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("[]")));
-        verify(client, times(1)).send(any());
-    }
-
-    @Test
     public void getsCoinsList() throws Exception {
         String jsonString = "{data: [{name: Bitcoin, price_usd: 6456.52}, {name: Ethereum, price_usd: 3500}]}";
         JsonObject jsonResponse = (JsonObject) JsonParser.parseString(jsonString);

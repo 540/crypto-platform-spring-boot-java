@@ -2,6 +2,7 @@ package crypto.Application;
 
 import crypto.Domain.Coin;
 import crypto.Infrastructure.Repositories.CryptoRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,11 +12,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class GetCoinsServiceTest {
+    private GetCoinsService getCoinsService;
+    private CryptoRepository cryptoRepository;
+
+    @BeforeEach
+    void setUp() {
+        cryptoRepository = mock(CryptoRepository.class);
+        getCoinsService = new GetCoinsService(cryptoRepository);
+    }
+
     @Test
     void getsNoCoins() {
-        GetCoinsService getCoinsService = new GetCoinsService();
-        CryptoRepository cryptoRepository = mock(CryptoRepository.class);
-        List<String> coins = getCoinsService.execute(cryptoRepository);
+        List<String> coins = getCoinsService.execute();
 
         when(cryptoRepository.getCoins()).thenReturn(new ArrayList<>());
 
@@ -25,8 +33,6 @@ public class GetCoinsServiceTest {
 
     @Test
     void getsCoins() {
-        GetCoinsService getCoinsService = new GetCoinsService();
-        CryptoRepository cryptoRepository = mock(CryptoRepository.class);
         List<Coin> remoteCoins = new ArrayList<>();
         remoteCoins.add(new Coin("Coin1"));
         remoteCoins.add(new Coin("Coin2"));
@@ -36,7 +42,7 @@ public class GetCoinsServiceTest {
 
         when(cryptoRepository.getCoins()).thenReturn(remoteCoins);
 
-        List<String> coins = getCoinsService.execute(cryptoRepository);
+        List<String> coins = getCoinsService.execute();
 
         verify(cryptoRepository, times(1)).getCoins();
         assertEquals(expectedCoinsNames, coins);

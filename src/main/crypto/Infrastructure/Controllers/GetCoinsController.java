@@ -11,11 +11,8 @@ public class GetCoinsController {
     @Autowired
     private GetCoinsService getCoinsService;
 
-    @Autowired
-    private CryptoRepository cryptoRepository;
-
     @GetMapping("/coins")
     public String index() {
-        return getCoinsService.execute(cryptoRepository).toString();
+        return getCoinsService.execute().toString();
     }
 }
