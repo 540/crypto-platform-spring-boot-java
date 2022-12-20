@@ -14,13 +14,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class GetRegardsControllerTest {
+public class GetGreetingControllerTest {
     @Autowired
     private MockMvc mvc;
 
     @Test
     public void getsRegards() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/regards").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.get("/greeting").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("Implement this part")));
     }
