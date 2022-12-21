@@ -9,6 +9,9 @@ bin/
 gen/
 
 # Gradle files
+gradle/
+gradlew
+gradlew.bat
 .gradle/
 build/
 /*/build/
