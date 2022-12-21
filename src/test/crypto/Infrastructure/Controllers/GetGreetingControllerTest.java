@@ -19,9 +19,9 @@ public class GetGreetingControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void getsRegards() throws Exception {
+    public void getGreeting() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/greeting").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Implement this part")));
+                .andExpect(content().string(equalTo("Hi from Spring boot!")));
     }
 }

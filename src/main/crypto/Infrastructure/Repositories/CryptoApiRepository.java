@@ -12,11 +12,11 @@ import java.net.http.HttpRequest;
 import java.util.List;
 
 @Repository
-public class CryptoRepository {
+public class CryptoApiRepository {
     @Autowired
     private final Client client;
 
-    public CryptoRepository(Client client) {
+    public CryptoApiRepository(Client client) {
         this.client = client;
     }
 

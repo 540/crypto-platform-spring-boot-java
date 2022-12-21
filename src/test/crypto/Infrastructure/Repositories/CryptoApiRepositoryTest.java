@@ -14,15 +14,15 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class CryptoRepositoryTest {
+public class CryptoApiRepositoryTest {
     @Test
     void getsNoCoins() {
         Client client = mock(Client.class);
-        CryptoRepository cryptoRepository = new CryptoRepository(client);
+        CryptoApiRepository cryptoApiRepository = new CryptoApiRepository(client);
 
         when(client.send(any(HttpRequest.class))).thenReturn(null);
 
-        List<Coin> coins = cryptoRepository.getCoins();
+        List<Coin> coins = cryptoApiRepository.getCoins();
 
         assertEquals(new ArrayList<Coin>(), coins);
     }
@@ -30,14 +30,14 @@ public class CryptoRepositoryTest {
     @Test
     void getsCoins() {
         Client client = mock(Client.class);
-        CryptoRepository cryptoRepository = new CryptoRepository(client);
+        CryptoApiRepository cryptoApiRepository = new CryptoApiRepository(client);
         List<Coin> expectedCoins = new ArrayList<>();
-        expectedCoins.add(new Coin("Bitcoin"));
+        expectedCoins.add(new Coin("Bitcoin", 5, 5));
         String jsonString = "{data: [{name: Bitcoin}]}";
         JsonObject jsonResponse = (JsonObject) JsonParser.parseString(jsonString);
 
         when(client.send(any(HttpRequest.class))).thenReturn(jsonResponse);
-        List<Coin> coins = cryptoRepository.getCoins();
+        List<Coin> coins = cryptoApiRepository.getCoins();
 
         assertEquals(expectedCoins.get(0).getName(), coins.get(0).getName());
     }

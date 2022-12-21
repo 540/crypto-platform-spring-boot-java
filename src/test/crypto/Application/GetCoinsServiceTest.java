@@ -1,7 +1,8 @@
 package crypto.Application;
 
 import crypto.Domain.Coin;
-import crypto.Infrastructure.Repositories.CryptoRepository;
+import crypto.Infrastructure.Repositories.CryptoApiRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,34 +12,39 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class GetCoinsServiceTest {
+    private CryptoApiRepository cryptoApiRepository;
+    private GetCoinsService getCoinsService;
+
+    @BeforeEach
+    void setUp() {
+    cryptoApiRepository = mock(CryptoApiRepository.class);
+    getCoinsService = new GetCoinsService(cryptoApiRepository);
+    }
+
     @Test
     void getsNoCoins() {
-        GetCoinsService getCoinsService = new GetCoinsService();
-        CryptoRepository cryptoRepository = mock(CryptoRepository.class);
-        List<String> coins = getCoinsService.execute(cryptoRepository);
+        List<String> coins = getCoinsService.execute();
 
-        when(cryptoRepository.getCoins()).thenReturn(new ArrayList<>());
+        when(cryptoApiRepository.getCoins()).thenReturn(new ArrayList<>());
 
-        verify(cryptoRepository, times(1)).getCoins();
+        verify(cryptoApiRepository, times(1)).getCoins();
         assertEquals(new ArrayList<String>(), coins);
     }
 
     @Test
     void getsCoins() {
-        GetCoinsService getCoinsService = new GetCoinsService();
-        CryptoRepository cryptoRepository = mock(CryptoRepository.class);
         List<Coin> remoteCoins = new ArrayList<>();
-        remoteCoins.add(new Coin("Coin1"));
-        remoteCoins.add(new Coin("Coin2"));
+        remoteCoins.add(new Coin("Coin1", 5, 5));
+        remoteCoins.add(new Coin("Coin2", 5, 5));
         List<String> expectedCoinsNames = new ArrayList<>();
         expectedCoinsNames.add("Coin1");
         expectedCoinsNames.add("Coin2");
 
-        when(cryptoRepository.getCoins()).thenReturn(remoteCoins);
+        when(cryptoApiRepository.getCoins()).thenReturn(remoteCoins);
 
-        List<String> coins = getCoinsService.execute(cryptoRepository);
+        List<String> coins = getCoinsService.execute();
 
-        verify(cryptoRepository, times(1)).getCoins();
+        verify(cryptoApiRepository, times(1)).getCoins();
         assertEquals(expectedCoinsNames, coins);
     }
 }
