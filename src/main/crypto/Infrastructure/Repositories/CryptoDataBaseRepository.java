@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CryptoDataBaseRepository {
+public class DBCoinRepository {
     public List<Coin> getPurchasedCoins() {
         List<Coin> coins = new ArrayList<>();
 
