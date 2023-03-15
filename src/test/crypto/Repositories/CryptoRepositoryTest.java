@@ -2,6 +2,7 @@ package crypto.Repositories;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import crypto.ApiErrorException;
 import crypto.Client;
 import crypto.Domain.Coin;
 import crypto.Repositories.CryptoRepository;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 public class CryptoRepositoryTest {
     @Test
-    void getsNoCoins() {
+    void getsNoCoins() throws ApiErrorException {
         Client client = mock(Client.class);
         CryptoRepository cryptoRepository = new CryptoRepository(client);
 
@@ -30,7 +31,7 @@ public class CryptoRepositoryTest {
     }
 
     @Test
-    void getsCoins() {
+    void getsCoins() throws ApiErrorException {
         Client client = mock(Client.class);
         CryptoRepository cryptoRepository = new CryptoRepository(client);
         List<Coin> expectedCoins = new ArrayList<>();

@@ -3,6 +3,7 @@ package crypto.Repositories;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import crypto.ApiErrorException;
 import crypto.Client;
 import crypto.Domain.Coin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,13 @@ import java.util.List;
 
 @Repository
 public class CryptoRepository {
-    @Autowired
     private final Client client;
 
     public CryptoRepository(Client client) {
         this.client = client;
     }
 
-    public List<Coin> getCoins() {
+    public List<Coin> getCoins() throws ApiErrorException {
         HttpRequest request = HttpRequest
                 .newBuilder(URI.create("https://api.coinlore.net/api/tickers/"))
                 .header("accept", "application/json")

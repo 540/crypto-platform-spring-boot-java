@@ -17,12 +17,12 @@ public class Client {
         this.client = HttpClient.newHttpClient();
     }
 
-    public JsonObject send(HttpRequest request) {
+    public JsonObject send(HttpRequest request) throws ApiErrorException {
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return new Gson().fromJson(response.body(), JsonObject.class);
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (IOException | InterruptedException exception) {
+            throw new ApiErrorException(exception.getMessage());
         }
     }
 }
