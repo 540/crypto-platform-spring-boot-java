@@ -4,7 +4,6 @@ public class Coin {
     private final String name;
     private final int id;
     private int usdValue;
-    private int cryptoQuantity;
 
     public Coin(int id, String name, int usdValue) {
         this.id = id;
