@@ -1,15 +1,16 @@
 package crypto.Domain;
 
-public class Coin {
+public class WalletCoin {
+    private int id;
     private final String name;
-    private final int id;
     private int usdValue;
     private int cryptoQuantity;
 
-    public Coin(int id, String name, int usdValue) {
+    public WalletCoin(int id, String name, int usdValue, int cryptoQuantity) {
         this.id = id;
         this.name = name;
         this.usdValue = usdValue;
+        this.cryptoQuantity = cryptoQuantity;
     }
 
     public String getName() {
