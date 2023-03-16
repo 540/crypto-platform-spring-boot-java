@@ -35,7 +35,7 @@ public class CryptoRepositoryTest {
         Client client = mock(Client.class);
         CryptoRepository cryptoRepository = new CryptoRepository(client);
         List<Coin> expectedCoins = new ArrayList<>();
-        expectedCoins.add(new Coin("Bitcoin"));
+        expectedCoins.add(new Coin("Bitcoin", 50));
         String jsonString = "{data: [{name: Bitcoin}]}";
         JsonObject jsonResponse = (JsonObject) JsonParser.parseString(jsonString);
 
